@@ -1,18 +1,15 @@
-# backend/model.py
 import os
 import google.generativeai as genai
 from dotenv import load_dotenv
 
 load_dotenv()
 
-# CORRECT WAY to get the key from the .env file
-api_key = os.getenv("AIzaSyD5m_OWlLrFlZGIjaWumCDfUvfjnCRCh8Q") 
+# Get API key from .env file
+api_key = os.getenv("AIzaSyD5m_OWlLrFlZGIjaWumCDfUvfjnCRCh8Q")
 
 if not api_key:
-    # If you haven't set up a .env file, you can hardcode it for testing,
-    # but be careful not to share it.
     print("Warning: GEMINI_API_KEY not found in .env file. Using a hardcoded key for now.")
-    api_key = "YOUR_API_KEY_HERE" # Replace with your key
+    api_key = "YOUR_API_KEY_HERE"  # Replace with your key
 
 genai.configure(api_key=api_key)
 

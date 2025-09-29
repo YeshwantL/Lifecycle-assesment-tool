@@ -1,6 +1,6 @@
 # backend/calculator.py
 import pandas as pd
-from model import predict_energy_if_missing 
+from backend.missing_values import predict_energy_if_missing 
 
 try:
     lci_data = pd.read_csv('data/lci_data.csv')
