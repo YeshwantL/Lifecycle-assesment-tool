@@ -1,6 +1,6 @@
 from flask import Flask, jsonify,request
 from flask_cors import CORS
-from perfrom_calculation import perform_calculation
+from backend.calculator import perform_calculations
 
 app=Flask(__name__)
 
@@ -19,7 +19,7 @@ def calculate():
     except ValueError:
         return jsonify({"error":"Invalid data types please verify again!!"}), 400
     
-    results= perform_calculation(tons, recycled_percent)
+    results= perform_calculations(tons, recycled_percent)
     
     if "error" in results:
         return jsonify(results), 500
