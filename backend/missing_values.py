@@ -9,7 +9,7 @@ api_key = os.getenv("GEMINI_API_KEY")
 
 if not api_key:
     print("Warning: GEMINI_API_KEY not found in .env file. Using a hardcoded key for now.")
-    api_key = "AIzaSyD5m_OWlLrFlZGIjaWumCDfUvfjnCRCh8Q"  # Replace with your key
+    api_key = "AIzaSyD5m_OWlLrFlZGIjaWumCDfUvfjnCRCh8Q"  # Replace with your actual key if needed
 
 genai.configure(api_key=api_key)
 

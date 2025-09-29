@@ -1,6 +1,5 @@
-# backend/calculator.py
 import pandas as pd
-from backend.missing_values import predict_energy_if_missing 
+from backend.missing_values import predict_energy_if_missing  # fixed import
 
 try:
     lci_data = pd.read_csv('data/lci_data.csv')
@@ -25,11 +24,11 @@ def perform_calculations(tons, recycled_percent):
     circular_energy = (primary_tons * primary_impacts['Energy Consumption']) + (secondary_tons * secondary_impacts['Energy Consumption'])
     circular_water = (primary_tons * primary_impacts['Water Usage']) + (secondary_tons * secondary_impacts['Water Usage'])
     
-    # This is how you would use the model if a value were missing.
-    # For now, we'll just log that it's being called.
-    print("Simulating call to AI to check for missing values...")
-    # example_prompt = "Provide the average energy consumption..."
-    # predict_energy_if_missing(example_prompt)
+    # Example AI fallback if a value is missing
+    if "Energy Consumption" not in primary_impacts:
+        example_prompt = "Provide the average energy consumption in kWh/ton for primary aluminum smelting."
+        ai_value = predict_energy_if_missing(example_prompt)
+        print("AI Predicted Energy:", ai_value)
 
     linear_carbon = tons * primary_impacts['Carbon Emissions']
     linear_energy = tons * primary_impacts['Energy Consumption']

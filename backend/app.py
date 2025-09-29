@@ -1,7 +1,6 @@
-# backend/app.py
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from calculator import perform_calculations # Ensure this function name matches calculator.py
+from backend.calculator import perform_calculations  # fixed import
 
 app = Flask(__name__)
 CORS(app)
