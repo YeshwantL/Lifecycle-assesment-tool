@@ -1,6 +1,6 @@
 from flask import Flask, jsonify,request
 from flask_cors import CORS
-from backend.calculator import perform_calculations
+from calculator import perform_calculations
 
 app=Flask(__name__)
 
