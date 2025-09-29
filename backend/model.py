@@ -1,19 +1,20 @@
-import google.generativeai as genai
+# backend/model.py
 import os
+import google.generativeai as genai
 from dotenv import load_dotenv
 
-# Load environment variables from .env file
 load_dotenv()
 
-# It's recommended to load the API key from an environment variable for security.
-# Create a .env file in this directory with the following content:
-# GENAI_API_KEY="your_google_api_key"
-genai_key = os.getenv("AIzaSyD5m_OWlLrFlZGIjaWumCDfUvfjnCRCh8Q")
+# CORRECT WAY to get the key from the .env file
+api_key = os.getenv("AIzaSyD5m_OWlLrFlZGIjaWumCDfUvfjnCRCh8Q") 
 
-if not genai_key:
-    raise ValueError("GENAI_API_KEY not found. Please set it in your .env file.")
+if not api_key:
+    # If you haven't set up a .env file, you can hardcode it for testing,
+    # but be careful not to share it.
+    print("Warning: GEMINI_API_KEY not found in .env file. Using a hardcoded key for now.")
+    api_key = "YOUR_API_KEY_HERE" # Replace with your key
 
-genai.configure(api_key=genai_key)
+genai.configure(api_key=api_key)
 
 def predict_energy_if_missing(prompt):
     try:
@@ -24,14 +25,9 @@ def predict_energy_if_missing(prompt):
         print(f"An error has occurred: {e}")
         return None
 
-# This block runs ONLY when you execute this script directly
 if __name__ == '__main__':
-    # Define the detailed prompt
     detailed_prompt = "Provide the average energy consumption in kWh/ton for primary aluminum smelting based on recent public data."
-
-    # Call the function with the prompt
     estimated_value = predict_energy_if_missing(detailed_prompt)
-
     if estimated_value:
         print("Gemini's Response:")
         print(estimated_value)
